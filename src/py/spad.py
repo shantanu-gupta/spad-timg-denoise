@@ -17,15 +17,16 @@ def invert_spad_timg(timg, tmin=1e-3, tmax=1e6):
 def invert_spad_logtimg(logtimg, tmin=1e-3, tmax=1e6):
     return np.exp(-np.clip(logtimg, np.log(tmin), np.log(tmax)))
 
-def sample_spad_timestamps(rates, N=1, tmin=None, tmax=None, eps=1e-6,
+def sample_spad_timestamps(rates, N=1, tmin=0, tmax=np.inf, eps=1e-6,
                         avg_fn='AM'):
     scale = 1.0 / np.maximum(rates, eps)
     H, W = scale.shape
     scale = scale.reshape((1, H, W))
     # --------------------------------------------------------------------------
     # first we just simulate the arrival times
-    # later we take samples according to the sensor
-    times = np.random.exponential(scale=scale, size=(N, H, W))
+    # we let tmin be the minimum time period the sensor can sensibly (haha)
+    # measure (basically = 1/2 of the clock period in some sense)
+    times = tmin + np.random.exponential(scale=scale, size=(N, H, W))
     # --------------------------------------------------------------------------
     # there are 2 ways to take the readings:
     #   1.  take N independent readings, waiting at most tmax for each one, and
@@ -36,26 +37,16 @@ def sample_spad_timestamps(rates, N=1, tmin=None, tmax=None, eps=1e-6,
     #   i think the paper assumes approach 2, so i've kept that one active.
     #
     #   NOTE: tmax has a different meaning (and scale) in the two approaches
-    #   
-    #   further, we let tmin be the minimum time period the sensor can sensibly
-    #   measure (basically = 1/2 of the clock period in some sense)
-    #
     # --------------------------------------------------------------------------
     # approach 1
     # --------------------------------------------------------------------------
-    # T = np.clip(times, tmin, tmax).mean(axis=0)
+    # T = np.clip(times, None, tmax).mean(axis=0)
     # --------------------------------------------------------------------------
     # approach 2
     # --------------------------------------------------------------------------
-    if tmax is None:
-        num_photons = N
-    else:
-        # count the photons we actually got
-        total_times = np.cumsum(times, axis=0)
-        num_photons = (total_times <= tmax).sum(axis=0)
-    # don't allow photons to be read instantly
-    if tmin is not None:
-        times = np.maximum(times, tmin)
+    # count the photons we actually got
+    total_times = np.cumsum(times, axis=0)
+    num_photons = (total_times <= tmax).sum(axis=0) # is a 2D array
     with np.errstate(divide='ignore', invalid='ignore'):
         if avg_fn == 'AM':
             if tmax is not None:
