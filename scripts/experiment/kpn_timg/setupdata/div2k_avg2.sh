@@ -8,9 +8,9 @@
 TRAIN_DATASET="div2k_linear_train"
 VAL_DATASET="div2k_linear_val"
 FILELIST_DIR="filelists"
-METADATA_DIR="generated/metadata/kpn_timg/avg1"
-GENDATA_DIR="generated/data/kpn_timg/avg1"
-GENCMDS_DIR="generated/cmds/kpn_timg/avg1"
+METADATA_DIR="generated/metadata/kpn_timg/avg2"
+GENDATA_DIR="generated/data/kpn_timg/avg2"
+GENCMDS_DIR="generated/cmds/kpn_timg/avg2"
 
 mkdir -p "${METADATA_DIR}"
 mkdir -p "${GENDATA_DIR}"
@@ -26,7 +26,9 @@ python -m scripts.base.kpn_timg.create_metadata \
 	--num-timgs 1 \
 	--tmin 1e-3 \
 	--tmax 1e6 \
-	--max-photon-rate 1.0
+	--max-photon-rate 1.0 \
+	--num-avg 2 \
+	--avg-fn GM
 
 rm -i "${GENCMDS_DIR}/${VAL_DATASET}_mkdir.cmdlist"
 rm -i "${GENCMDS_DIR}/${VAL_DATASET}_cp_orig.cmdlist"
@@ -75,7 +77,9 @@ python -m scripts.base.kpn_timg.create_metadata \
 	--num-timgs 4 \
 	--tmin 1e-3 \
 	--tmax 1e6 \
-	--max-photon-rate 1.0
+	--max-photon-rate 1.0 \
+	--num-avg 2 \
+	--avg-fn GM
 
 rm -i "${GENCMDS_DIR}/${TRAIN_DATASET}_mkdir.cmdlist"
 rm -i "${GENCMDS_DIR}/${TRAIN_DATASET}_cp_orig.cmdlist"
