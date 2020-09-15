@@ -3,7 +3,6 @@
 import argparse
 import numpy as np
 from skimage.util import img_as_float
-from src.py.spad import invert_spad_avgcounts, spad_p1
 from src.py.spad import invert_spad_timg, spad_timg
 from src.py.spad import invert_spad_logtimg, spad_logtimg
 import src.py.io as io_utils
