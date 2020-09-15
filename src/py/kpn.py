@@ -291,7 +291,7 @@ class KPN_MildenhallEtAl_logtimg(nn.Module):
     @lru_cache(maxsize=1)
     def load_checkpoint(path):
         have_gpu = torch.cuda.is_available()
-        device = torch.device('cuda:0') if have_gpu else torch.device('cpu')
+        device = None if have_gpu else torch.device('cpu')
         checkpoint = torch.load(path, map_location=device)
         Kout = checkpoint['Kout']
         model = KPN_MildenhallEtAl_logtimg(Kout=Kout)

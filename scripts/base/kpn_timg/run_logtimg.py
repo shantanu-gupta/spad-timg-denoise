@@ -28,8 +28,8 @@ def main(args):
     i0, i1 = gap_H//2, H - (gap_H - (gap_H//2))
     j0, j1 = gap_W//2, W - (gap_W - (gap_W//2))
     logtimg = logtimg[i0:i1, j0:j1]
-    if torch.cuda.is_available():
-        logtimg = logtimg.cuda()
+    # if torch.cuda.is_available():
+    #     logtimg = logtimg.cuda()
     logtimg = logtimg.view(1, 1, logtimg.shape[0], logtimg.shape[1])
     model = KPN_MildenhallEtAl_logtimg.load_checkpoint(args.model)
     denoised = model(logtimg)[0][0,0,:,:]
