@@ -20,7 +20,7 @@ echo "create_metadata"
 python -m scripts.base.kpn_timg.create_metadata \
 	"${FILELIST_DIR}/${VAL_DATASET}_imgs.list" \
 	"${METADATA_DIR}/${VAL_DATASET}.json" \
-	--orig-data-dir ./datasets \
+	--orig-data-dir ./generated/data \
 	--gen-data-dir "${GENDATA_DIR}/${VAL_DATASET}" \
 	--spatial-downscale 4 \
 	--num-timgs 1 \
@@ -69,7 +69,7 @@ echo "create_metadata"
 python -m scripts.base.kpn_timg.create_metadata \
 	"${FILELIST_DIR}/${TRAIN_DATASET}_imgs.list" \
 	"${METADATA_DIR}/${TRAIN_DATASET}.json" \
-	--orig-data-dir ./datasets \
+	--orig-data-dir ./generated/data \
 	--gen-data-dir "${GENDATA_DIR}/${TRAIN_DATASET}" \
 	--spatial-downscale 4 \
 	--num-timgs 4 \
