@@ -19,9 +19,11 @@ def _create_parser():
     help_str = 'RNG seed'
     parser.add_argument('-s', '--rng-seed', type=int, help=help_str)
     help_str = 'Minimum recordable time'
-    parser.add_argument('--tmin', type=float, help=help_str)
+    parser.add_argument('--tmin', type=float, help=help_str,
+                        default=0)
     help_str = 'Maximum recordable time'
-    parser.add_argument('--tmax', type=float, help=help_str)
+    parser.add_argument('--tmax', type=float, help=help_str,
+                        default=float('inf'))
     help_str = 'How many photons we are recording'
     parser.add_argument('--num-avg', type=int, help=help_str,
                         default=1)

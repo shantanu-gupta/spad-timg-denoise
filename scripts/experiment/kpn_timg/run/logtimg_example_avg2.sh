@@ -19,6 +19,8 @@ python -m scripts.base.convert_to_float_img \
 python -m scripts.base.create_timg_from_float_img \
 	"${FLOAT_IMG}" \
 	--logtimg "${LOGTIMG}" \
+	--tmin 1e-3 \
+	--tmax 1e6 \
 	--num-avg 2 \
 	--avg-fn GM
 python -m scripts.base.kpn_timg.run_logtimg \

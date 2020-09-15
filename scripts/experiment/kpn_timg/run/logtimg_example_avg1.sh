@@ -18,7 +18,9 @@ python -m scripts.base.convert_to_float_img \
 	"${EXAMPLE_IMG}" "${FLOAT_IMG}"
 python -m scripts.base.create_timg_from_float_img \
 	"${FLOAT_IMG}" \
-	--logtimg "${LOGTIMG}"
+	--logtimg "${LOGTIMG}" \
+	--tmin 1e-3 \
+	--tmax 1e6
 python -m scripts.base.kpn_timg.run_logtimg \
 	"${LOGTIMG}" \
 	"${DENOISED_LOGTIMG}" \

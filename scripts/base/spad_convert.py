@@ -16,13 +16,11 @@ def _create_parser():
     parser.add_argument('output', type=str, help=help_str)
     help_str = 'Type of mapping'
     parser.add_argument('-m', '--mapping', type=str, help=help_str,
-                        choices=['counts-to-radiance',
-                                'timg-to-radiance',
+                        choices=['timg-to-radiance',
                                 'logtimg-to-radiance',
-                                'radiance-to-counts',
                                 'radiance-to-timg',
                                 'radiance-to-logtimg'],
-                        default='counts-to-radiance')
+                        default='logtimg-to-radiance')
     help_str = 'Max photon count (needed for some mappings)'
     parser.add_argument('-p', '--max-photon-rate', type=float, help=help_str)
     return parser
@@ -36,14 +34,10 @@ def main(args):
         raise NotImplementedError
 
     max_rate = args.max_photon_rate
-    if args.mapping == 'counts-to-radiance':
-        img = invert_spad_avgcounts(img)
-    elif args.mapping == 'timg-to-radiance':
+    if args.mapping == 'timg-to-radiance':
         img = invert_spad_timg(img)
     elif args.mapping == 'logtimg-to-radiance':
         img = invert_spad_logtimg(img)
-    elif args.mapping == 'radiance-to-counts':
-        img = spad_p1(img * max_rate)
     elif args.mapping == 'radiance-to-timg':
         img = spad_timg(img * max_rate)
     elif args.mapping == 'radiance-to-logtimg':
