@@ -13,7 +13,7 @@ python -m scripts.base.kpn_timg.train_logtimg \
 	--Kout 5 \
 	--crop-size 128 \
 	--dloader-workers 4 \
-	--epochs 10 \
+	--epochs 3 \
 	--batch-size 5 \
 	--lr 1e-4 \
 	--log-dir "${LOG_DIR}" \
