@@ -25,7 +25,7 @@ python -m scripts.base.kpn_timg.create_metadata \
 	--spatial-downscale 4 \
 	--num-timgs 1 \
 	--tmin 1e-3 \
-	--tmax 1e6 \
+	--tmax 2e6 \
 	--max-photon-rate 1.0 \
 	--num-avg 2 \
 	--avg-fn GM
@@ -76,7 +76,7 @@ python -m scripts.base.kpn_timg.create_metadata \
 	--spatial-downscale 4 \
 	--num-timgs 4 \
 	--tmin 1e-3 \
-	--tmax 1e6 \
+	--tmax 2e6 \
 	--max-photon-rate 1.0 \
 	--num-avg 2 \
 	--avg-fn GM
