@@ -3,10 +3,10 @@
 TRAIN_DATASET="div2k_linear_train"
 DATA_NAME="trained_on_${TRAIN_DATASET}_logtimg"
 
-OUTPUT_DIR="./generated/output/kpn_timg/avg2/${DATA_NAME}"
+OUTPUT_DIR="./generated/output/kpn_timg/avg10/${DATA_NAME}"
 mkdir -p "${OUTPUT_DIR}"
 
-CKPT="./generated/models/ckpt/kpn_timg/avg2/${DATA_NAME}/state_final.tar"
+CKPT="./generated/models/ckpt/kpn_timg/avg10/${DATA_NAME}/state_final.tar"
 EXAMPLE_IMG="./generated/data/DIV2K_linear/DIV2K_valid_HR/0812.png"
 
 FLOAT_IMG="${OUTPUT_DIR}/grayscale.tiff"
@@ -20,8 +20,8 @@ python -m scripts.base.create_timg_from_float_img \
 	"${FLOAT_IMG}" \
 	--logtimg "${LOGTIMG}" \
 	--tmin 1e-3 \
-	--tmax 2e6 \
-	--num-avg 2 \
+	--tmax 1e7 \
+	--num-avg 10 \
 	--avg-fn GM
 python -m scripts.base.kpn_timg.run_logtimg \
 	"${LOGTIMG}" \
