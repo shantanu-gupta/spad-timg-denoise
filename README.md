@@ -9,4 +9,4 @@ See `scripts/experiment/kpn_timg/setupdata/`. They set up a training dataset of 
 See `scripts/experiment/kpn_timg/train/`.
 
 ## Running a trained KPN denoiser on a simulated example image
-See the files in `scripts/experiment/kpn_timg/run/`. They take you from a PNG file representing (linear) image radiances, to a simulated log-timestamp image, to denoising it through the KPN, then mapping it back to a radiance value. You need to train the model using the previous steps (or get a trained model from me) for this to work.
+See the files in `scripts/experiment/kpn_timg/run/`. They take you from a PNG file representing (linear) image radiances, to a simulated log-timestamp image, to denoising it through the KPN, then mapping it back to a radiance value. You need to train a model using the previous steps (or get a trained model from me) for this to work.
